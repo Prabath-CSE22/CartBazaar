@@ -1,0 +1,80 @@
+.lform{
+    background-color: white;
+    width: 250px;
+    height: 300px;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 3%;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    position: relative;
+    transform: translateY(35%);
+    left: 10%;
+    border-radius: 20px;
+}
+.lform:hover{
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    /* transform:scale(1.05); */
+}
+
+.links{
+    display: flex;
+    gap: 10px;
+    font-size: 10px;
+}
+
+.inputbox{
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    width: 100%;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center; 
+}
+
+.input{
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 14px;
+    background-color: transparent;
+    /* border: 1.5px solid rgb(0, 0, 0); */
+    color: rgb(0, 0, 0);
+}
+
+.input::placeholder{
+    color: rgb(0, 0, 0);
+    font-size: 14px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    /* padding: 10px; */
+}
+.icon{
+    transform: translateY(-180%);
+    position: relative;
+    color: black;
+    left: 45%;
+}
+.inputbox button{
+    width: 108%;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 10px;
+    background-color: rgb(211, 211, 211);
+    color: rgb(0, 0, 0);
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+
+}
+
+.inputbox button:hover{
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+}
+
+.inputbox button:active{
+    transform: scale(0.95);
+}

@@ -3,7 +3,7 @@ import { useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 const register = () => {
-    const [user, setUser] = useState({name: '', age: '', email: '', dob: '', address: '', username: '', password: '', role: 'user'});
+    const [user, setUser] = useState({name: '', age: '', email: '', dob: '', address: '', username: '', password: '', role: 'user', pic: ''});
     const [password, setPassword] = useState('');
     const [reenterPassword, setReenterPassword] = useState('');
     const navigate = useNavigate();

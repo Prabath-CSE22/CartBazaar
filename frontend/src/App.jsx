@@ -5,8 +5,8 @@ import Login from './pages/login'
 import Register from './pages/register'
 import Home from './pages/home'
 import axios from 'axios'
+
 const App = () => {
-  
   axios.defaults.withCredentials = true;
   return (
     
@@ -14,7 +14,6 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/register" element={<Register />} />
         </Routes>

@@ -1,18 +1,22 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-
+import styles from './home.module.css'
+import Login from './login'
 const home = () => {
     const navigate = useNavigate();
-  return (
-    <div>
-        <h1>Home</h1>
-        <button onClick={() => {
-            console.log('Redirecting to login...');
-            navigate('/login');
-            }}>Login</button>
+return (
+    <body className={styles.homePageBody}>
+            <nav>
+                    <div className={styles.navbar}>
+                            <div className={styles.navbar__logo}>
+                                    <h1>Home</h1>
+                            </div>
+                    </div>
+            </nav>
 
-    </div>
-  )
+            <Login />
+    </body>
+)
 }
 
 export default home
