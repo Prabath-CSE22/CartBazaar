@@ -72,14 +72,14 @@ const dashboard = () => {
       await axios.get('http://localhost:5000/logout');
       setAuth(false);
       setUser(null);
-      navigator('/login');
+      navigator('/');
       }}>Logout</button>
       </div> : 
       <div>
       <h1>Not Authorized</h1>
       <button onClick={() => {
         console.log('Redirecting to login...');
-        navigator('/login');
+        navigator('/');
       }}>Login</button>
       </div>
       }

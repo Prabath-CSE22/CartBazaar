@@ -12,8 +12,11 @@ const login = () => {
     })
 
     const navigate = useNavigate();
+
+    
   return (
-    <form onSubmit={async (e) => {
+    <div>
+      <form onSubmit={async (e) => {
         e.preventDefault();
         const response = await axios.post('http://localhost:5000/login', user);
         if(response.data === 'Ok'){
@@ -22,24 +25,31 @@ const login = () => {
             alert('Invalid username or password');
         }
     }} className={styles.lform}>
+      <img src="./bg1_1.png" className={styles.logo}/>
       <h1>Login</h1>
       <div className={styles.inputbox}>
+        <label className={styles.nametag}>*Username:</label>
         <input type="text" placeholder='username' onChange={(e) => {
             setUser({...user, username: e.target.value});
           }} className={styles.input}/>
           <i className={`bx bx-user ${styles.icon}`}></i>
         
+        <label className={styles.nametag}>*Password:</label>
           <input type="password" placeholder='password' onChange={(e) => {
             setUser({...user, password: e.target.value});
         }} className={styles.input}/>
         <i class= {`bx bx-lock-alt ${styles.icon}`} ></i>
     <button type='submit'>Login</button>
     <div className={styles.links}>
-    <Link to='/register'>Register</Link>
-    <Link to='/forgot'>Forgot Password</Link>
+    <Link to='/register' className={styles.link}>Register</Link>
+    <Link to='/forgot' className={styles.link}>Forgot Password</Link>
     </div>
     </div>
     </form>
+    
+    </div>
+
+    
   )
 }
 

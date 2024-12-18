@@ -118,6 +118,11 @@ app.get('/logout', (req, res) => {
 
 });
 
+app.get('/usernames', async (req, res) => {
+    const users = await User.find({}, {username: 1, _id: 0});
+    res.send(users);
+});
+
 app.get('/auth', async (req, res) => {
     const token = req.cookies.token;
 
