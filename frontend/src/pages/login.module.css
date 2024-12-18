@@ -1,0 +1,108 @@
+.lform{
+    backdrop-filter: blur(20px);
+    width: 250px;
+    color: rgb(201, 201, 201);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 3%;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    position: relative;
+    transform: translateY(20%);
+    left: 9.5%;
+    border-radius: 20px;
+}
+.logo{
+    width: 60%;
+    height: auto;
+    position: relative;
+    transform: translateY(-35%);
+    margin-bottom: -40%;
+
+}
+.nametag{
+    font-size: 10px;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.link{
+    color: rgb(201, 201, 201);
+}
+.links{
+    display: flex;
+    gap: 10px;
+    font-size: 10px;
+}
+
+.link:hover{
+    cursor: pointer;
+    color: rgb(244, 165, 38);
+}
+
+.inputbox{
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    width: 100%;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center; 
+}
+
+.input{
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 14px;
+    background-color: transparent;
+    border: 1.5px solid rgb(201, 201, 201);
+    color: rgb(201, 201, 201);
+}
+
+.input::placeholder{
+    color: rgb(201, 201, 201);
+    font-size: 14px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    /* padding: 10px; */
+}
+.icon{
+    transform: translateY(-180%);
+    position: relative;
+    color: rgb(201, 201, 201);
+    left: 45%;
+}
+.inputbox button{
+    width: 108%;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 10px;
+    background-color: rgb(211, 211, 211);
+    color: black;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    border: none;
+}
+
+.inputbox button:hover{
+    background-color: rgb(244, 165, 38);
+    color: black;
+}
+
+.inputbox button:active{
+    transform: scale(0.95);
+}
+
+@media (max-width: 500px){
+    .lform{
+        margin: 0 auto;
+        padding: 5%;
+        margin-bottom: 10%;
+        position: relative;
+        left: 0%;
+    }
+    
+}
