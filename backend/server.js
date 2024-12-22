@@ -101,7 +101,7 @@ app.post('/login', async (req, res) => {
         const user = await User.findOne({username : username}, {password: 1, _id: 1, role: 1});
         bcrypt.compare(password, user.password, (err, result) => {
         if(result){
-            const token = jwt.sign({username, role: user.role, id:user._id}, 'jwt-secret-key', {expiresIn: '10m'});
+            const token = jwt.sign({username, role: user.role, id:user._id}, 'jwt-secret-key');
             res.cookie('token', token);
             res.send('Ok');
         }else{
