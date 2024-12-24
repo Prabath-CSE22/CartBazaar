@@ -26,13 +26,14 @@ const User = mongoose.model('users', new mongoose.Schema({
     name: String,
     age: Number,
     email: String,
-    dob: Date,
+    dob: String,
     address: String,
     username: String,
     password: String,
     role: String,
     pic: {type: String},
 }));
+
 
 app.put('/profilepic', async (req, res) => {
     const { id, pic } = req.body;
@@ -42,6 +43,29 @@ app.put('/profilepic', async (req, res) => {
         res.send('Ok');
     } catch (err) {
         res.status(500).send({ error: "Error updating profile picture", message: err.message });
+    }
+});
+
+app.put('/update', async (req, res) => {
+    const { id, name, email, address, username } = req.body;
+    const uid = new ObjectId(id);
+    try {
+        await User.updateOne({ _id: uid }, { $set: { name, email, address, username }});
+        res.send('Ok');
+    } catch (err) {
+        res.status(500).send({ error: "Error updating user data", message: err.message });
+    }
+});
+
+app.put('/updatepassword', async (req, res) => {
+    const { id, password } = req.body;
+    const uid = new ObjectId(id);
+    const hashedPassword = bcrypt.hashSync(password, 10);
+    try {
+        await User.updateOne({ _id: uid }, { $set: { password: hashedPassword }});
+        res.send('Ok');
+    } catch (err) {
+        res.status(500).send({ error: "Error updating password", message: err.message });
     }
 });
 
@@ -82,6 +106,18 @@ app.post('/register', async (req, res) =>{
 })
 
 
+app.post("/user", async (req, res) => {
+    const { id } = req.body;
+    const uid = new ObjectId(id);
+
+    try {
+        const user_id = await User.find({ _id: uid }, { _id: 0, role: 0, pic: 0, dob: 0, age: 0 });
+        res.send(user_id);
+    } catch (err) {
+        res.status(500).send({ error: "Error fetching user data", message: err.message });
+    }
+});
+
 app.post("/user_id", async (req, res) => {
     const { id } = req.body;
     const uid = new ObjectId(id);
@@ -93,7 +129,6 @@ app.post("/user_id", async (req, res) => {
         res.status(500).send({ error: "Error fetching user data", message: err.message });
     }
 });
-
 
 app.post('/login', async (req, res) => {
     const {username, password} = req.body;

@@ -20,7 +20,7 @@ const login = () => {
         e.preventDefault();
         const response = await axios.post('http://localhost:5000/login', user);
         if(response.data === 'Ok'){
-            navigate('/profile');
+            navigate('/shop');
         }else{
             alert('Invalid username or password');
         }

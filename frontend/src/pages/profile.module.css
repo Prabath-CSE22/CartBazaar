@@ -11,8 +11,11 @@
 }
 .body{
     width: 90%;
-    margin: 0 auto;
-    /* display: flex; */
+    margin:0 auto;
+    height: 100vh;
+    display: flex;
+    gap: 10%;
+    margin-top: 5%;
 }
 
 /* Navbar styles */
@@ -86,7 +89,85 @@
     transform: translateX(-50%);
     background: linear-gradient(to right, #0070f3, #00e5ff);
 }
+.profile{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 150%;
+    /* margin: 40px auto; */
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.125);
+    transition: transform 0.3s ease;
+    color: rgb(201, 201, 201);
+}
 
+.inputbox{
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    width: 100%;
+    margin-bottom: 10px;
+    /* margin: 0 auto; */
+    justify-content: center;
+    align-items: center; 
+}
+
+.inputbox2 {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 30px; /* Add a gap of 10px (or any desired value) between child elements */
+}
+
+.input{
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 14px;
+    background-color: transparent;
+    border: 1.5px solid rgb(201, 201, 201);
+    color: rgb(201, 201, 201);
+}
+
+.input::placeholder{
+    color: rgb(201, 201, 201);
+    font-size: 14px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    /* padding: 10px; */
+}
+
+.inputbtn{
+    width: 105%;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 10px;
+    background-color: rgb(211, 211, 211);
+    color: black;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    border: none;
+}
+.nametag{
+    font-size: 10px;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.inputbtn:hover{
+    background-color: rgb(244, 165, 38);
+    color: black;
+}
+
+.inputbtn:active{
+    transform: scale(0.95);
+}
 /* Profile Card styles */
 .pCard {
     display: flex;
@@ -94,6 +175,7 @@
     align-items: center;
     gap: 20px;
     width: 20%;
+    height: 45%;
     /* margin: 40px auto; */
     padding: 40px;
     background: rgba(255, 255, 255, 0.1);
@@ -104,9 +186,9 @@
     transition: transform 0.3s ease;
 }
 
-.pCard:hover {
+/* .pCard:hover {
     transform: translateY(-5px);
-}
+} */
 
 .pCard img {
     width: 150px;
@@ -198,30 +280,108 @@
     transform: translateX(-60%);
 }
 
-/* Responsive Design */
-@media screen and (max-width: 768px) {
-    .navbar {
-        width: 100%;
-        left: 0;
-        border-radius: 0;
-        padding: 15px;
-    }
-
-    .links {
-        gap: 15px;
-    }
-
-    .link {
-        font-size: clamp(0.8rem, 5vw, 1.2rem);
-    }
-
-    .pCard {
+/* Enhanced Responsive Design */
+@media screen and (max-width: 1200px) {
+    .body {
         width: 90%;
-        padding: 20px;
+        gap: 2rem;
+    }
+    .profile{
+        width: 100%;
+    }
+    .profileCard {
+        width: 70%;
     }
     
+    .pCard {
+        width: 30%;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .navbar {
+        width: 95%;
+        padding: 1rem;
+    }
+    .profile{
+        width: 90%;
+    }
+    .links {
+        gap: 1.5rem;
+    }
+    
+    .link {
+        font-size: 1rem;
+    }
+}
+
+@media screen and (max-width: 950px) {
+    .body {
+        flex-direction: column;
+        gap: 1.5rem;
+        padding-top: 2rem;
+    }
+    
+    .profile {
+        width: 90%;
+        margin-right: 0;
+        padding: 1.5rem;
+    }
+    
+    .profileCard {
+        width: 100%;
+        margin-right: 0;
+    }
+    
+    .pCard {
+        width: 90%;
+        padding: 1.5rem;
+    }
+    
+    .navbar {
+        width: 90%;
+        border-radius: 0;
+    }
+    
+    .links {
+        gap: 1rem;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .navbar {
+        padding: 0.75rem;
+    }
+    
+    .links {
+        gap: 0.75rem;
+    }
+    
+    .link {
+        font-size: 0.875rem;
+        padding: 0.5rem;
+    }
+    
+    .icon, .profilepic {
+        width: 36px;
+        height: 36px;
+    }
+    .profile{
+        width: 90%;
+    }
     .pCard img {
         width: 120px;
         height: 120px;
+    }
+    
+    .dropdown {
+        width: 10%;
+        right: 1rem;
+        padding: auto;
+    }
+    .dropdown button{
+        padding: 15%;
+        font-size: x-small;
+        text-align: center;
     }
 }
