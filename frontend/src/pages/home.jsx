@@ -1,14 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./home.module.css";
 import Login from "./login";
+import axios from "axios";
 
 const Home = () => {
-    const [clicked, setClicked] = useState(false);
-
-    const handleClick = () => {
-        setClicked(!clicked);
-    };
+    // const navigator = useNavigate();
+    // const [auth, setAuth] = useState(false);
+    // useEffect(async () => {
+    //   const respond = await axios.get('http://localhost:5000/auth', { withCredentials: true });
+    //   if (respond.data.decoded) {
+    //     setAuth(true);
+    //   } else {
+    //     setAuth(false);
+    //   }
+    // }, []);
 
     return (
         <div className={styles.homePageBody}>
