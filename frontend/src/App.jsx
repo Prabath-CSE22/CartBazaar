@@ -6,7 +6,6 @@ import Home from './pages/home'
 import Shop from './pages/shop'
 import Profile from './pages/profile'
 import axios from 'axios'
-
 const App = () => {
   axios.defaults.withCredentials = true;
   return (
@@ -21,6 +20,11 @@ const App = () => {
           <Route path="/profile" element={<Profile />} />
         </Routes>
       </BrowserRouter>
+      <footer class="footer mt-auto py-3 bg-light">
+        <div class="container">
+          <span class="text-muted">Place sticky footer content here.</span>
+        </div>
+      </footer>
     </div>
   )
 }

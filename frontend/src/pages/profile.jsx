@@ -88,7 +88,7 @@ const dashboard = () => {
         <nav className={styles.navbar}>
             <img src="./bg1_1.png" alt="" className={styles.icon}/>
             <div className={styles.links}>
-              <Link to="/dashboard" className={styles.link}>Dashboard</Link>
+              <Link to="/profile" className={styles.link}>Dashboard</Link>
               <Link to="/shop" className={styles.link}>Shop</Link>
             </div>            
             <img src={defaultImage} alt="" className={styles.profilepic} onClick={() => {
@@ -241,9 +241,6 @@ const dashboard = () => {
       </form>
       {/* //mu gatta badu methana pennanna one */}
       </body>
-      <footer>
-          
-      </footer>
       </main>
        : 
       <div>
