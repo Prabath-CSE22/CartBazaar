@@ -26,7 +26,6 @@ const dashboard = () => {
     const fetchUsernames = async () => {
       try {
           const response = await axios.get('http://localhost:5000/usernames');
-          // Directly map the response data and set the usernames
           setUsernames(response.data.map(user => user.username));
       } catch (error) {
           console.error("Error fetching usernames:", error);
@@ -38,7 +37,6 @@ const dashboard = () => {
     useEffect(() => {
       const fetchAuthStatusAndProfilePic = async () => {
         try {
-          // Fetch authentication status
           const authResponse = await axios.get('http://localhost:5000/auth', { withCredentials: true });
           
           if (authResponse.data.decoded) {
@@ -105,7 +103,6 @@ const dashboard = () => {
             </div>}
       </header>
       <body className={styles.body}>
-        {/* <h1>Dashboard {role}</h1> */}
         <div className={styles.pCard}>
         <img src={defaultImage} alt="" />
         <div className={styles.uploadPhoto}>

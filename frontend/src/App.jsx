@@ -5,6 +5,7 @@ import Register from './pages/register'
 import Home from './pages/home'
 import Shop from './pages/shop'
 import Profile from './pages/profile'
+import Admin from './pages/admindash'
 import axios from 'axios'
 const App = () => {
   axios.defaults.withCredentials = true;
@@ -18,6 +19,7 @@ const App = () => {
           <Route path="/register" element={<Register />} />
           <Route path="/shop" element={<Shop />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/admin" element={<Admin />} />
         </Routes>
       </BrowserRouter>
       <footer class="footer mt-auto py-3 bg-light">

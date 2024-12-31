@@ -1,0 +1,105 @@
+.cartItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #ffffff;
+    border: 1px solid #e8edf1;
+    border-radius: 12px;
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.cartItem:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transform: translateY(-1px);
+    border-color: #d0d7de;
+}
+
+.itemDetails {
+    flex: 1;
+    min-width: 0; /* Prevents flex item from overflowing */
+}
+
+.itemImage {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.itemImage h3 {
+    color: #1a2b3b;
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin: 0;
+    line-height: 1.4;
+}
+
+.itemMeta {
+    display: flex;
+    gap: 1.5rem;
+    color: #4b5563;
+    font-size: 0.9375rem;
+}
+
+.itemMeta span {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.itemMeta span:last-child {
+    font-weight: 600;
+    color: #2563eb;
+}
+
+.delbtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fef2f2;
+    color: #dc2626;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-left: 1rem;
+}
+
+.delbtn:hover {
+    background-color: #fee2e2;
+    color: #b91c1c;
+    transform: scale(1.05);
+}
+
+.delbtn:active {
+    transform: scale(0.95);
+}
+
+.delbtn i {
+    font-size: 1.25rem;
+}
+
+@media (max-width: 640px) {
+    .cartItem {
+        padding: 1rem;
+    }
+    
+    .itemImage h3 {
+        font-size: 1rem;
+    }
+    
+    .itemMeta {
+        flex-direction: column;
+        gap: 0.5rem;
+        font-size: 0.875rem;
+    }
+    
+    .delbtn {
+        width: 36px;
+        height: 36px;
+    }
+}

@@ -34,6 +34,68 @@ const User = mongoose.model('users', new mongoose.Schema({
     pic: {type: String},
 }));
 
+const Product = mongoose.model('products', new mongoose.Schema({
+    product_name: String,
+    product_des: String,
+    product_price: Number,
+    product_pic: {type: String},
+}));
+
+const CartItem = mongoose.model('cartitems', new mongoose.Schema({
+    id: String,
+    product_name: String,
+    quantity: Number,
+    total_price: Number,
+}));
+
+app.post('/addproduct', async (req, res) => {
+    const { name, description, price, image } = req.body;
+    try {
+        const product = new Product({ product_name: name, product_des: description, product_price: price, product_pic: image});
+        await product.save();
+        res.send('Ok');
+    } catch (err) {
+        res.status(500).send({ error: "Error adding product", message: err.message });
+    }
+});
+
+app.get('/products', async (req, res) => {
+    const products = await Product.find({}, { _id: 0, product_name: 1, product_des: 1, product_price: 1, product_pic: 1 });
+    res.send(products);
+});
+
+app.post('/cart', async (req, res) => {
+    const { id } = req.body;
+    try {
+        const cartItems = await CartItem.find({ id: id }, { _id: 1, product_name: 1, quantity: 1, total_price: 1 });
+        res.send(cartItems);
+    } catch (err) {
+        res.status(500).send({ error: "Error fetching cart items", message: err.message });
+    }
+});
+
+app.delete('/deletecartitem/:id', async (req, res) => {
+    const { id } = req.params;
+    const uid = new ObjectId(id);
+    try {
+        await CartItem.deleteOne({ _id: uid });
+        res.send('Ok');
+    } catch (err) {
+        res.status(500).send({ error: "Error deleting cart item", message: err.message });
+    }
+});
+
+app.post('/addtocart', async (req, res) => {
+    const { id, product_name, quantity, total_price } = req.body;
+    try {
+        const cartItem = new CartItem({ id, product_name, quantity, total_price });
+        await cartItem.save();
+        res.send('Ok');
+    } catch (err) {
+        res.status(500).send({ error: "Error adding to cart", message: err.message });
+    }
+});
+
 
 app.put('/profilepic', async (req, res) => {
     const { id, pic } = req.body;
