@@ -1,7 +1,10 @@
 /* Main container */
 .main {
-    background: linear-gradient(135deg, #97a8f5, #005eff);
-    min-height: 100vh;
+    background-image: url('./bg2.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;    min-height: 100vh;
     margin: 0 auto;
     /* padding: 0; */
 }

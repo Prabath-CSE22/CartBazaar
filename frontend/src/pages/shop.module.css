@@ -1,5 +1,9 @@
 .shopPageBody {
-    background: linear-gradient(135deg, #97a8f5, #005eff);
+    background-image: url('./bg2.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
     width: 100%;
     min-height: 100vh;
     margin: 0 auto;
