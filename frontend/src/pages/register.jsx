@@ -43,7 +43,7 @@ return (
                 alert('Username already exists');
                 document.getElementById('username').value = '';
             }else{
-                const updatedUser = {...user, password};
+                const updatedUser = {...user, password};                
                 const response = await axios.post('http://localhost:5000/register', updatedUser);
                 if(response.data === 'Ok'){
                     navigate('/');

@@ -2,13 +2,16 @@ import React, { useEffect, useState } from 'react'
 import styles from './cart.module.css'
 import CartItem from './cartItem'
 import axios from 'axios'
+import CartSummery from './cartsummery'
 
-const Cart = ({id}) => {
+const Cart = ({id, setIsClicked, isClicked}) => {
     const [cart, setCart] = useState([]);
     const [total, setTotal] = useState(0);
+    const [random, setRandom] = useState();
     
    useEffect(() => {
     const fetchCartItems = async () => {
+      setRandom(`INV-${new Date().getFullYear()}-${Math.floor(Math.random() * (1000 - 1) + 1)}`);
       try {
         const cartItems = await axios.post('http://localhost:5000/cart', { id: id });
         setCart(cartItems.data);
@@ -41,7 +44,16 @@ const Cart = ({id}) => {
         <h3>Total: </h3>
         <h3>${total.toFixed(2)}</h3>
       </div>
-      <button className={styles.cartbtn}>Purchase</button>
+      <button className={styles.cartbtn} onClick={async () =>{
+        {if(cart.length !== 0) {
+          await axios.post(`http://localhost:5000/addpurchases`, { id: id, random: random, total: total });
+        }}
+        await axios.delete(`http://localhost:5000/deleteall/${id}`);
+        setCart([]);
+        console.log(random);
+       
+      }}>Purchase</button>
+
     </div>
   )
 }

@@ -1,6 +1,6 @@
 .container{
     background-image: url('./bgimg.jpg');
-    height: 100vh;
+    min-height: 100vh;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -19,7 +19,218 @@
     display: grid;
     align-items: center;
     justify-content: center;
+}
+.navbar {
+    backdrop-filter: blur(20px);
+    padding: 15px 30px;
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: -10px auto;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.125);
+    margin-bottom: 2.5%;
+}
+.statusbar{
+    width: 80%;
+    display: grid;
+    /* gap: 2%; */
+    margin: 0 auto;
+    margin-top: 5%;
+    margin-left: 6%;
+}
+select {
+    padding: 8px 12px;
+    border: 1px solid #4CAF50;
+    border-radius: 4px;
+    background-color: #f8fff8;
+    font-size: 14px;
+    cursor: pointer;
+    outline: none;
+    color: #2c5282;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+   }
+   
+   select:hover {
+    border-color: #45a049;
+    background-color: #f0fff0;
+   }
+   
+   select:focus {
+    border-color: #388e3c;
+    box-shadow: 0 0 0 2px rgba(76,175,80,0.2);
+   }
+   
+   /* Status-specific colors */
+   option[value="Processing"] {
+    background-color: #fff3cd;
+    color: #856404;
+   }
+   
+   option[value="Out for Delivery"] {
+    background-color: #cce5ff;
+    color: #004085;
+   }
+   
+   option[value="Finished"] {
+    background-color: #d4edda;
+    color: #155724;
+   }
 
+   option[value="Delivered"] {
+    background-color: #90EE90;
+    color: #006400;
+   }
+.orders{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 5%;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.125);
+    transition: transform 0.3s ease;
+    color: rgb(201, 201, 201);
+    margin-bottom: 40px;
+}
+.ordertable{
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    color: rgb(232, 232, 232);
+    font-family: system-ui, -apple-system, sans-serif;
+    background: rgba(102, 102, 102, 0.2);
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 20px 0;
+}
+.ordertablehead{
+    background: rgba(255, 255, 255, 0.1);
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.ordertable th, 
+.ordertable td {
+    padding: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+}
+
+.ordertable thead th {
+    background: rgba(255, 255, 255, 0.05);
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-align: center;  /* Added this line */
+
+}
+
+.ordertable tbody td {
+    font-size: 0.875rem;
+}
+
+.dropdown{
+    width: 10%;
+    padding: 10px;
+    position: absolute;
+    display: inline-block;
+    top: 90px;
+    left: 81%;
+    transform: translateY(10%);
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    justify-content: center;
+    align-items: center;
+}
+.logout{
+    width: 100%;
+    padding: 10px;
+    margin: 0 auto;
+    border-radius: 10px;
+    background-color: rgb(211, 211, 211);
+    color: black;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    border: none;
+}
+.logout:hover{
+    background-color: rgb(244, 165, 38);
+    color: black;
+}
+
+.logout:active{
+    transform: scale(0.95);
+}
+.icon {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.icon:hover {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.links {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    flex-grow: 1;
+    justify-content: center;
+}
+
+.link {
+    color: white;
+    text-decoration: none;
+    font-size: 1.5rem;
+    padding: 10px;
+    margin: 0 10px;
+    position: relative;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.link:hover::after {
+    content: '';
+    position: absolute;
+    width: 50%;
+    height: 3px;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(to right, #0070f3, #00e5ff);
+}
+
+.profilepic {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.profilepic:hover {
+    transform: scale(1.1);
+    border-color: rgba(255, 255, 255, 0.5);
 }
 .register h1{
     margin: 0 auto;

@@ -7,14 +7,14 @@ import {useNavigate} from 'react-router-dom';
 import defaultPic from '/default.png';
 import { Link } from 'react-router-dom';
 import Cart from '../components/cart';
-
+import CartSummery from '../components/cartsummery';
 const shop = () => {
   const navigator = useNavigate();
   const [user, setUser] = useState(null);
       const [auth, setAuth] = useState(false);
      const [role, setRole] = useState(null);
      const [id, setId] = useState(null);
-        
+    const [isClicked, setisClicked] = useState(false);
     const [defaultImage, setDefaultImage] = useState(defaultPic);
     const [clicked, setClicked] = useState(false);
     
@@ -105,7 +105,13 @@ const shop = () => {
             }} className={styles.logout}>Logout</button>
             </div>}
       </header>
-      <section className={styles.shopSection} >
+      <section className={styles.shopSection} onClick={() => {
+              if(clicked) {
+                setClicked(false);
+              }else if(cartOpen) {
+                setCartOpen(false);
+              }
+            }}>
       {
         products.map((product) => (
           <ProductCard
@@ -119,8 +125,7 @@ const shop = () => {
         ))
       }
       </section>
-      {cartOpen && <Cart id={id} />}
-
+      {cartOpen && <Cart id={id} isClicked={isClicked} setIsClicked={setisClicked}/>}
     </body>
   )
 }

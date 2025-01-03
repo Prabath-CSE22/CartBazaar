@@ -5,11 +5,12 @@ import Default from '/default.png';
 import axios from 'axios';
 
 const ProductCard = ({ id, product_name, product_des, product_price, productImage }) => {
-  const [order, setOrder] = useState({id:id, product_name: product_name, quantity: 0, total_price: 0});
+  const [date, setDate] = useState(new Date().toISOString().slice(0, 10).replace('T', ' '));
+  const [order, setOrder] = useState({id:id, product_name: product_name, quantity: 0, total_price: 0, date: ''});
   const [quantity, setQuantity] = useState(0);
 
   useEffect(() => {
-    setOrder({id:id, product_name: product_name, quantity: quantity, total_price: quantity * product_price});
+    setOrder({id:id, product_name: product_name, quantity: quantity, total_price: quantity * product_price, date: date});
   }, [quantity]);
 
   return (

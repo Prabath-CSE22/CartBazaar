@@ -19,8 +19,12 @@ const login = () => {
       <form onSubmit={async (e) => {
         e.preventDefault();
         const response = await axios.post('http://localhost:5000/login', user);
-        if(response.data === 'Ok'){
+        console.log(response);
+        
+        if(response.data.message === 'Ok' && response.data.role === 'user'){
             navigate('/shop');
+        }else if(response.data.message === 'Ok' && response.data.role === 'admin'){
+            navigate('/admin');
         }else{
             alert('Invalid username or password');
         }
