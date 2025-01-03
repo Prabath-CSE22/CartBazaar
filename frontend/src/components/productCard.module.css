@@ -1,6 +1,7 @@
 .card {
-    width: 250px;
-    color: rgb(201, 201, 201);
+    max-width: 250px;
+    /* background: rgb(255, 255, 255); */
+    color: #ffffff;
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -31,7 +32,7 @@
     border-radius: 50%;
     object-fit: cover;
     /* border: 3px solid rgba(255, 255, 255, 0.3); */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); */
 }
 
   .content {
@@ -96,7 +97,7 @@
     width: 32px;
     height: 32px;
     border-radius: 50%;
-    background-color: #f3f4f6;
+    background-color: rgba(255, 255, 255, 0.921);
     border: none;
     display: flex;
     align-items: center;
@@ -126,7 +127,7 @@
     padding: 10px;
     margin: 5px 0;
     border-radius: 10px;
-    background-color: rgb(211, 211, 211);
+    background-color: rgba(255, 255, 255, 0.921);
     color: black;
     font-size: 16px;
     font-weight: bold;

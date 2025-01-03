@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import styles from './cart.module.css'
 import CartItem from './cartItem'
 import axios from 'axios'
-import CartSummery from './cartsummery'
 
 const Cart = ({id, setIsClicked, isClicked}) => {
     const [cart, setCart] = useState([]);

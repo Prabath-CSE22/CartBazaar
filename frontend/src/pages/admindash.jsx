@@ -56,8 +56,8 @@ const admindash = () => {
         <form onSubmit={async (e) => {
             e.preventDefault();
             await axios.post('http://localhost:5000/addproduct', product);
-        }
-        }>
+        } 
+        } className={styles.form}>
             <div className={styles.inputbox}>
                 <label className={styles.nametag}>*Product Name:</label>
                 <input className={styles.input} type="text" name="name" placeholder='Product Name' onChange={(e) => {
