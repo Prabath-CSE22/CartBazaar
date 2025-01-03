@@ -5,16 +5,7 @@ import Login from "./login";
 import axios from "axios";
 
 const Home = () => {
-    // const navigator = useNavigate();
-    // const [auth, setAuth] = useState(false);
-    // useEffect(async () => {
-    //   const respond = await axios.get('http://localhost:5000/auth', { withCredentials: true });
-    //   if (respond.data.decoded) {
-    //     setAuth(true);
-    //   } else {
-    //     setAuth(false);
-    //   }
-    // }, []);
+   
 
     return (
         <div className={styles.homePageBody}>

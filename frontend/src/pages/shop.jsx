@@ -6,13 +6,15 @@ import axios from 'axios';
 import {useNavigate} from 'react-router-dom';
 import defaultPic from '/default.png';
 import { Link } from 'react-router-dom';
+import Cart from '../components/cart';
+import CartSummery from '../components/cartsummery';
 const shop = () => {
   const navigator = useNavigate();
   const [user, setUser] = useState(null);
       const [auth, setAuth] = useState(false);
      const [role, setRole] = useState(null);
      const [id, setId] = useState(null);
-        
+    const [isClicked, setisClicked] = useState(false);
     const [defaultImage, setDefaultImage] = useState(defaultPic);
     const [clicked, setClicked] = useState(false);
     
@@ -23,9 +25,11 @@ const shop = () => {
         username: '', 
         password: '',
       });
-      
-    const [password, setPassword] = useState(null);
-    const [reenterPassword, setReenterPassword] = useState(null);
+    
+      const [cartOpen, setCartOpen] = useState(false);
+
+      const [products, setProducts] = useState([]);
+
     useEffect(() => {
       const fetchAuthStatusAndProfilePic = async () => {
         try {
@@ -53,6 +57,9 @@ const shop = () => {
               { withCredentials: true }
             );
 
+            const productsResponse = await axios.get('http://localhost:5000/products');
+            setProducts(productsResponse.data);
+
             const image = profilePicResponse.data.pic;
             if (image !== '') {
               setDefaultImage(image);
@@ -67,7 +74,7 @@ const shop = () => {
       };
     
       fetchAuthStatusAndProfilePic();
-    }, []);
+    }, [products]);
     
   return (
     <body className={styles.shopPageBody}>
@@ -78,9 +85,16 @@ const shop = () => {
               <Link to="/profile" className={styles.link}>Dashboard</Link>
               <Link to="/shop" className={styles.link}>Shop</Link>
             </div>            
-            <img src={defaultImage} alt="" className={styles.profilepic} onClick={() => {
-              setClicked(!clicked);
-            }}/>
+            <div className={styles.profile}>
+              <i className={`bx bx-cart-alt ${styles.cartIcon}`} onClick={() => {
+                setCartOpen(!cartOpen);
+                {clicked && setClicked(false);}
+              }}></i>
+              <img src={defaultImage} alt="" className={styles.profilepic} onClick={() => {
+                setClicked(!clicked);
+                {cartOpen && setCartOpen(false);}
+              }}/>
+            </div>
         </nav>
         {clicked && <div className={styles.dropdown}>
            <button onClick={async() =>{
@@ -91,18 +105,27 @@ const shop = () => {
             }} className={styles.logout}>Logout</button>
             </div>}
       </header>
-      <section className={styles.shopSection}>
+      <section className={styles.shopSection} onClick={() => {
+              if(clicked) {
+                setClicked(false);
+              }else if(cartOpen) {
+                setCartOpen(false);
+              }
+            }}>
       {
-        Array(10).fill().map((_, i) => (
+        products.map((product) => (
           <ProductCard
-            key={i}
-            product_name="Product Name"
-            product_des="Product Description"
-            product_price="Product Price"
+            key={product.id}
+            id={id}
+            product_name={product.product_name}
+            product_des={product.product_des}
+            product_price={product.product_price}
+            productImage={product.product_pic}
           />
         ))
       }
       </section>
+      {cartOpen && <Cart id={id} isClicked={isClicked} setIsClicked={setisClicked}/>}
     </body>
   )
 }

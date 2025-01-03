@@ -14,12 +14,15 @@
     position: relative;
     transform: translateY(5%);
     left: 8%;
-    padding: 1%;
+    padding: 2%;
     border-radius: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    display: grid;
     align-items: center;
+    justify-content: center;
+
+}
+.register h1{
+    margin: 0 auto;
 }
 
 .logo{
@@ -27,7 +30,8 @@
     height: auto;
     position: relative;
     transform: translateY(-20%);
-    margin-bottom: -25%;
+    margin: 0 auto;
+    margin-bottom: -20%;
 }
 .nametag{
     font-size: 10px;

@@ -22,11 +22,11 @@ const dashboard = () => {
       password: '',
     });
     const [usernames, setUsernames] = useState([]);
+    const [purchasedItems, setPurchasedItems] = useState([]);
 
     const fetchUsernames = async () => {
       try {
           const response = await axios.get('http://localhost:5000/usernames');
-          // Directly map the response data and set the usernames
           setUsernames(response.data.map(user => user.username));
       } catch (error) {
           console.error("Error fetching usernames:", error);
@@ -38,7 +38,6 @@ const dashboard = () => {
     useEffect(() => {
       const fetchAuthStatusAndProfilePic = async () => {
         try {
-          // Fetch authentication status
           const authResponse = await axios.get('http://localhost:5000/auth', { withCredentials: true });
           
           if (authResponse.data.decoded) {
@@ -63,6 +62,8 @@ const dashboard = () => {
               { withCredentials: true }
             );
 
+            const productsResponse = await axios.post('http://localhost:5000/purchaseditems', { id: authResponse.data.decoded.id });
+            setPurchasedItems(productsResponse.data);    
             const image = profilePicResponse.data.pic;
             if (image !== '') {
               setDefaultImage(image);
@@ -77,7 +78,7 @@ const dashboard = () => {
       };
     
       fetchAuthStatusAndProfilePic();
-    }, []);
+    }, [purchasedItems]);
     
 
     return (
@@ -105,7 +106,7 @@ const dashboard = () => {
             </div>}
       </header>
       <body className={styles.body}>
-        {/* <h1>Dashboard {role}</h1> */}
+        <div className={styles.profileContainer}>
         <div className={styles.pCard}>
         <img src={defaultImage} alt="" />
         <div className={styles.uploadPhoto}>
@@ -122,6 +123,7 @@ const dashboard = () => {
         }}>Upload</button>
       </div>
       </div>
+      <div className={styles.profileForm}>
       <form onSubmit={async (e) => {
         e.preventDefault();
         if(password !== null){
@@ -140,7 +142,7 @@ const dashboard = () => {
         }
       }}>
      <div className={styles.profile}>
-    <h2>Profile</h2>
+    <h1>Profile</h1>
     <div className={styles.inputbox}>
       <label className={styles.nametag}>*Name:</label>
       <input
@@ -239,7 +241,63 @@ const dashboard = () => {
     </div>
   </div>
       </form>
-      {/* //mu gatta badu methana pennanna one */}
+      
+      </div>
+        </div>
+      <div className={styles.purchases}>
+      <h1>My Orders</h1>
+      <table className={styles.purchasesTable}>
+        <thead className={styles.purchasesTableHead}>
+          <tr>
+            <th rowspan="2">Invoice Number</th>
+            <th colspan="3" class="products-header">Products</th>
+            <th rowspan="2">Total Price</th>
+            <th rowspan="2">Status</th>
+          </tr>
+          <tr>
+            <th>Product Name</th>
+            <th>Quantity</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          {purchasedItems.map((item) => (
+            <>
+              {item.products.map((product, index) => (
+                <tr key={index}>
+                  {index === 0 && (
+                    <td rowSpan={item.products.length}>{item.invoice_num}</td>
+                  )}
+                  <td>{product.product_name}</td>
+                  <td>{product.quantity}</td>
+                  <td>{`$${product.total_price}`}</td>
+                  {index === 0 && (
+                    <>
+                      <td rowSpan={item.products.length}>{`$${item.total_price}`}</td>
+                      
+                      {(item.status === "Out for Delivery") ? <select className={styles.opt} value={item.status} onChange={async (e) => {
+                            try {
+                                await axios.put(`http://localhost:5000/updatestatus/${item.invoice_num}`, {
+                                status: e.target.value
+                            });
+                            } catch (err) {
+                                console.error('Error updating status:', err);
+                            }
+                        }}
+                        >
+                            <option value="Out for Delivery">Out for Delivery</option>  
+                            <option value="Delivered">Delivered</option>
+                        </select> :
+                        <td rowSpan={item.products.length}>{item.status}</td>}
+                    </>
+                  )}
+                </tr>
+              ))}
+            </>
+          ))}
+        </tbody>
+      </table>
+      </div>
       </body>
       </main>
        : 

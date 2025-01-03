@@ -1,16 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import styles from './ProductCard.module.css';
 import Default from '/default.png';
+import axios from 'axios';
 
-const ProductCard = ({ product_name, product_des, product_price }) => {
+const ProductCard = ({ id, product_name, product_des, product_price, productImage }) => {
+  const [date, setDate] = useState(new Date().toISOString().slice(0, 10).replace('T', ' '));
+  const [order, setOrder] = useState({id:id, product_name: product_name, quantity: 0, total_price: 0, date: ''});
   const [quantity, setQuantity] = useState(0);
+
+  useEffect(() => {
+    setOrder({id:id, product_name: product_name, quantity: quantity, total_price: quantity * product_price, date: date});
+  }, [quantity]);
 
   return (
     <div className={styles.card}>
       <div className={styles.imageContainer}>
         <img
-          src={Default}
+          src={productImage || Default}
           alt={product_name}
           className={styles.productImage}
         />
@@ -43,7 +50,11 @@ const ProductCard = ({ product_name, product_des, product_price }) => {
             </div>
           </div>
           
-          <button className={styles.addToCartButton}>
+          <button className={styles.addToCartButton} onClick={async() => {
+              { quantity > 0 && await axios.post('http://localhost:5000/addtocart', order)
+              setQuantity(0);}
+            }
+            }>
             Add to Cart
           </button>
         </div>

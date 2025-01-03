@@ -34,6 +34,155 @@ const User = mongoose.model('users', new mongoose.Schema({
     pic: {type: String},
 }));
 
+const Product = mongoose.model('products', new mongoose.Schema({
+    product_name: String,
+    product_des: String,
+    product_price: Number,
+    product_pic: {type: String},
+}));
+
+const CartItem = mongoose.model('cartitems', new mongoose.Schema({
+    id: String,
+    product_name: String,
+    quantity: Number,
+    total_price: Number,
+    date: String,
+}));
+
+const PurchasedItem = mongoose.model('purchaseditems', new mongoose.Schema({
+    id: String,
+    products: [{
+        product_name: String,
+        quantity: Number,
+        total_price: Number
+    }],
+    total_price: Number,
+    date: String,
+    invoice_num: String,
+    status: String
+}));
+
+app.get('/purchaseditems', async (req, res) => {
+    const purchases = await PurchasedItem.find({}, { _id: 0, id: 1, products: 1, total_price: 1, date: 1, invoice_num: 1, status: 1 });
+    res.send(purchases);
+});
+
+app.put('/updatestatus/:invoice_num', async (req, res) => {
+    const { invoice_num } = req.params;
+    const { status } = req.body;
+    try {
+        await PurchasedItem.updateOne({ invoice_num }, { $set: { status } });
+        res.send('Ok');
+    } catch (err) {
+        res.status(500).send({ error: "Error updating status", message: err.message });
+    }
+});
+
+app.get('/useraddress', async (req, res) =>{
+    try{
+        const address = await User.find({}, {_id: 1, address: 1});
+        res.status(200).send(address);
+    }catch(err){
+        res.status(500).send({error: "Error fetching user address", message: err.message});
+    }
+});
+
+app.post('/addpurchases', async (req, res) => {
+    const { id, random, total } = req.body;
+    try {
+        const items = await CartItem.find({ id: id }).lean();
+        
+        const purchase = new PurchasedItem({
+            id: id,
+            products: items.map(item => ({
+                product_name: item.product_name,
+                quantity: item.quantity,
+                total_price: item.total_price
+            })),
+            total_price: total,
+            date: new Date().toISOString(),
+            invoice_num: random,
+            status: 'Pending'
+        });
+
+        await purchase.save();
+        res.send('Ok');
+    } catch (err) {
+        console.error('Error:', err);
+        res.status(500).send({ error: "Error adding purchases", message: err.message });
+    }
+});
+
+app.post('/purchaseditems', async (req, res) => {
+    const { id } = req.body;   
+    const purchases = await PurchasedItem.find({id: id}, { _id: 0, id: 1, products: 1, total_price: 1, date: 1, invoice_num: 1, status: 1 });
+    res.send(purchases);
+});
+
+app.post('/purchases', async (req, res) => {
+    const { id } = req.body;   
+    const purchases = await PurchasedItem.find({id: id}, { _id: 0, id: 1, products: 1, total_price: 1, date: 1, invoice_num: 1 });
+    res.send(purchases);
+});
+
+app.delete('/deleteall/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+        await CartItem.deleteMany({ id: id });
+        res.send('Ok');
+    } catch (err) {
+        res.status(500).send({ error: "Error deleting all cart items", message: err.message });
+    }
+});
+
+app.post('/addproduct', async (req, res) => {
+    const { name, description, price, image } = req.body;
+    try {
+        const product = new Product({ product_name: name, product_des: description, product_price: price, product_pic: image});
+        await product.save();
+        res.send('Ok');
+    } catch (err) {
+        res.status(500).send({ error: "Error adding product", message: err.message });
+    }
+});
+
+app.get('/products', async (req, res) => {
+    const products = await Product.find({}, { _id: 0, product_name: 1, product_des: 1, product_price: 1, product_pic: 1 });
+    res.send(products);
+});
+
+app.post('/cart', async (req, res) => {
+    const { id } = req.body;
+    try {
+        const cartItems = await CartItem.find({ id: id }, { _id: 1, product_name: 1, quantity: 1, total_price: 1 });
+        res.send(cartItems);
+    } catch (err) {
+        res.status(500).send({ error: "Error fetching cart items", message: err.message });
+    }
+});
+
+app.delete('/deletecartitem/:id', async (req, res) => {
+    const { id } = req.params;
+    const uid = new ObjectId(id);
+    try {
+        await CartItem.deleteOne({ _id: uid });
+        res.send('Ok');
+    } catch (err) {
+        res.status(500).send({ error: "Error deleting cart item", message: err.message });
+    }
+});
+
+app.post('/addtocart', async (req, res) => {
+    const { id, product_name, quantity, total_price, date } = req.body;
+    try {
+        const cartItem = new CartItem({ id, product_name, quantity, total_price, date });
+        await cartItem.save();
+        res.send('Ok');
+    } catch (err) {
+        res.status(500).send({ error: "Error adding to cart", message: err.message });
+    }
+});
+
 
 app.put('/profilepic', async (req, res) => {
     const { id, pic } = req.body;
@@ -118,6 +267,18 @@ app.post("/user", async (req, res) => {
     }
 });
 
+app.post("address", async (req, res) => {
+    const { id } = req.body;
+    const uid = new ObjectId(id);
+
+    try {
+        const user_id = await User.find({ _id: uid }, { address: 1, _id: 0 });
+        res.send(user_id);
+    } catch (err) {
+        res.status(500).send({ error: "Error fetching user data", message: err.message });
+    }
+});
+
 app.post("/user_id", async (req, res) => {
     const { id } = req.body;
     const uid = new ObjectId(id);
@@ -138,7 +299,7 @@ app.post('/login', async (req, res) => {
         if(result){
             const token = jwt.sign({username, role: user.role, id:user._id}, 'jwt-secret-key');
             res.cookie('token', token);
-            res.send('Ok');
+            res.status(200).json({message: 'Ok', role: user.role});
         }else{
             res.send('Invalid username or password');
         }
