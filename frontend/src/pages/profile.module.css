@@ -1,10 +1,6 @@
 /* Main container */
 .main {
-    background-image: url('./bgimg.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center;
+    background: linear-gradient(135deg, #97a8f5, #005eff);
     min-height: 100vh;
     margin: 0 auto;
     /* padding: 0; */
@@ -115,7 +111,7 @@
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
     border: 1px solid rgba(255, 255, 255, 0.125);
     transition: transform 0.3s ease;
-    color: rgb(201, 201, 201);
+    color: white;
 }
 
 .inputbox{
@@ -143,22 +139,22 @@
     font-size: 14px;
     background-color: transparent;
     border: 1.5px solid rgb(201, 201, 201);
-    color: rgb(201, 201, 201);
+    color: white;
 }
 
 .input::placeholder{
-    color: rgb(201, 201, 201);
+    color: rgba(255, 255, 255, 0.719);
     font-size: 14px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     /* padding: 10px; */
 }
 
 .inputbtn{
-    width: 105%;
+    width: 102%;
     padding: 10px;
     margin: 5px 0;
     border-radius: 10px;
-    background-color: rgb(211, 211, 211);
+    background-color: rgba(255, 255, 255, 0.885);
     color: black;
     font-size: 16px;
     font-weight: bold;
@@ -173,7 +169,7 @@
 }
 
 .inputbtn:hover{
-    background-color: rgb(244, 165, 38);
+    background-color: rgb(247, 163, 29);
     color: black;
 }
 
@@ -225,7 +221,7 @@
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
     border: 1px solid rgba(255, 255, 255, 0.125);
     transition: transform 0.3s ease;
-    color: rgb(201, 201, 201);
+    color: white;
     margin-bottom: 20px;
 }
 
@@ -233,7 +229,7 @@
     width: 100%;
     border-collapse: separate;
     border-spacing: 0;
-    color: rgb(232, 232, 232);
+    color: white;
     font-family: system-ui, -apple-system, sans-serif;
     background: rgba(102, 102, 102, 0.2);
     border-radius: 12px;
@@ -371,7 +367,7 @@ select {
     padding: 10px;
     margin: 5px 0;
     border-radius: 10px;
-    background-color: rgb(211, 211, 211);
+    background-color: rgba(255, 255, 255, 0.912);
     color: black;
     font-size: 16px;
     font-weight: bold;

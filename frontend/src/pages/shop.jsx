@@ -7,7 +7,6 @@ import {useNavigate} from 'react-router-dom';
 import defaultPic from '/default.png';
 import { Link } from 'react-router-dom';
 import Cart from '../components/cart';
-import CartSummery from '../components/cartsummery';
 const shop = () => {
   const navigator = useNavigate();
   const [user, setUser] = useState(null);
